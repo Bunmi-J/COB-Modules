@@ -38,6 +38,31 @@ resource "aws_s3_bucket_versioning" "versioning-s3" {
   }
 }
 
+
+resource "aws_s3_bucket_public_access_block" "public_access" {
+  bucket = aws_s3_bucket.cob-s3.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+
+# Enforce encryption on s3
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt_config_s3" {
+  bucket = aws_s3_bucket.cob-s3.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+
+# s3 object for cob
 resource "aws_s3_object" "cob-object" {
   bucket = aws_s3_bucket.cob-s3.bucket
   count = var.enable_object_upload ? 1 : 0

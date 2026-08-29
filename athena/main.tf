@@ -42,6 +42,31 @@ resource "aws_s3_bucket_versioning" "s3_athena_results" {
   }
 }
 
+
+# Enforce Public access blocking
+
+resource "aws_s3_bucket_public_access_block" "athena_public_access" {
+  bucket = aws_s3_bucket.query_results.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+# To enforce encryption
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt_s3" {
+  bucket = aws_s3_bucket.query_results.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+
 # cob workgroup to control where query is run and where query results are written to
 resource "aws_athena_workgroup" "cob_workgroup" {
   name = "${var.project_name}-${var.environment}-athena"

@@ -27,7 +27,7 @@ variable "query_results_bucket_name" {
 variable "project_name" {
     type = string
     description = "This is the project title"
-    #default = "cob-project"
+    #default = "cob-root-project"
 }
 
 variable "environment" {

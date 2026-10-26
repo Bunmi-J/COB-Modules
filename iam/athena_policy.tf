@@ -57,6 +57,28 @@ data "aws_iam_policy_document" "query_access" {
     resources = ["*"]
   }
 
+  
+  statement {
+    sid    = "AthenaDataCatalogManagement"
+    effect = "Allow"
+
+    actions = [
+      "athena:GetDataCatalog",
+      "athena:ListDataCatalogs",
+      "athena:CreateDataCatalog",
+      "athena:UpdateDataCatalog",
+      "athena:DeleteDataCatalog",
+      "athena:ListTagsForResource",
+      "athena:TagResource",
+      "athena:UntagResource"
+    ]
+
+    resources = ["*"]
+  }
+
+
+
+
   statement {
     sid    = "S3SourceDataRead"
     effect = "Allow"

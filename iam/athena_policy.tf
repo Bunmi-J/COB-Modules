@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "data_engineer_assume" {
     principals {
       type = "AWS"
 
-      identifiers =  aws_iam_role.data_engineer.arn        #var.allowed_principal_arns 
+      identifiers =   "arn:aws:iam::469935552963:user/Admin"  #aws_iam_role.data_engineer.arn        #var.allowed_principal_arns 
 
        #"arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/cob-data-engineer" 
 
@@ -148,3 +148,32 @@ resource "aws_iam_role_policy_attachment" "athena_access_attachment" {
   policy_arn = aws_iam_policy.athena_access_policy.arn
 }
 
+
+data "aws_iam_policy_document" "admin_assume_data_engineer" {
+  statement {
+    sid    = "AssumeDataEngineerRole"
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole"
+    ]
+
+    resources = [
+      aws_iam_role.data_engineer.arn
+    ]
+  }
+}
+
+
+resource "aws_iam_policy" "admin_assume_data_engineer" {
+  name        = "${var.project_name}-${var.environment}-admin-assume-data-engineer"
+  description = "Allows the Admin IAM user to assume the data engineer role"
+
+  policy = data.aws_iam_policy_document.admin_assume_data_engineer.json
+}
+
+
+resource "aws_iam_user_policy_attachment" "admin_assume_data_engineer" {
+  user       = "Admin"
+  policy_arn = aws_iam_policy.admin_assume_data_engineer.arn
+}

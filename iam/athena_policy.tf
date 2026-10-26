@@ -158,9 +158,9 @@ data "aws_iam_policy_document" "admin_assume_data_engineer" {
       "sts:AssumeRole"
     ]
 
-    resources = [
-      aws_iam_role.data_engineer.arn
-    ]
+    resources = "arn:aws:iam::469935552963:role/system/cob-project-dev-data-engineer"
+    #  [aws_iam_role.data_engineer.arn
+  # ]
   }
 }
 

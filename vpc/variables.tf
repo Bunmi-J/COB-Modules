@@ -46,8 +46,8 @@ variable "availability_zones" {
 }
 
 variable "subnet_routetable" {
-    description = "name tag for the subnet routebale"
-    type = string
+  description = "name tag for the subnet routebale"
+  type        = string
 }
 
 variable "enable_nat_gateway" {
@@ -63,12 +63,12 @@ variable "map_public_ip_on_launch" {
 }
 
 variable "nat_gateway" {
-    description = "Nat gate to allow internet access for the private subnet"
-    type    = string
+  description = "Nat gate to allow internet access for the private subnet"
+  type        = string
 }
 
 variable "project_name" {
-    type = string
-    description = "This is the project title"
-    #default = "cob-project"
+  type        = string
+  description = "This is the project title"
+  #default = "cob-project"
 }

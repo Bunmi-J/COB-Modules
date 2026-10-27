@@ -15,19 +15,19 @@ output "private_subnet_cidrs" {
 
 output "public_subnet_ids" {
   description = "public subnet ids"
-  value = aws_subnet.cob_public[*].id
+  value       = aws_subnet.cob_public[*].id
 }
 
 
 
 output "private_subnet_ids" {
   description = "private subnet ids"
-  value = aws_subnet.cob_private[*].id
+  value       = aws_subnet.cob_private[*].id
 }
 
 output "isolated_subnet_ids" {
   description = "isolated subnet ids"
-  value = aws_subnet.cob_isolated[*].id
+  value       = aws_subnet.cob_isolated[*].id
 }
 
 

@@ -7,7 +7,7 @@ resource "aws_security_group" "cob_rds" {
   tags = {
     Name        = "${var.project_name}-rds-sg"
     Environment = "${var.environment}"
-    consumer = "${var.consumer_name}"
+    consumer    = "${var.consumer_name}"
   }
 }
 
@@ -40,7 +40,7 @@ resource "aws_db_subnet_group" "cob_rds" {
 
 
 resource "aws_db_instance" "cob_rds_instance" {
-  identifier = "${var.project_name}-${var.environment}-postgres"  
+  identifier           = "${var.project_name}-${var.environment}-postgres"
   allocated_storage    = var.allocated_storage
   db_name              = var.db_name
   engine               = var.engine
@@ -53,9 +53,9 @@ resource "aws_db_instance" "cob_rds_instance" {
 
   vpc_security_group_ids = [aws_security_group.cob_rds.id]
   #parameter_group_name = var.parametergroup_name
-  skip_final_snapshot  = true
+  skip_final_snapshot = true
   tags = {
-    Name        = "${var.project_name}-${var.environment}-postgres"
+    Name     = "${var.project_name}-${var.environment}-postgres"
     consumer = var.consumer_name
   }
 }

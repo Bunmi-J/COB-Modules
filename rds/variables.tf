@@ -64,8 +64,8 @@ variable "isolated_subnet_ids" {
 #}
 
 variable "vpc_id" {
-    description = "vpc id for the rds"
-  type = string
+  description = "vpc id for the rds"
+  type        = string
 }
 
 variable "publicly_accessible" {
@@ -75,8 +75,8 @@ variable "publicly_accessible" {
 }
 
 variable "ecs_security_group_id" {
-    description = "ecs security group id allowed to connect to postgresql referenced by ingress_rule"
-    type = string
+  description = "ecs security group id allowed to connect to postgresql referenced by ingress_rule"
+  type        = string
 }
 
 variable "consumer_name" {
@@ -85,6 +85,6 @@ variable "consumer_name" {
 }
 
 variable "security_groupname" {
-    description = "This describe the specific security group name "
-    type = string
+  description = "This describe the specific security group name "
+  type        = string
 }

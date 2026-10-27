@@ -129,7 +129,7 @@ data "aws_iam_policy_document" "glue_service_permission" {
     resources = ["*"]
   }
 
-  
+
 
   # Allow Glue to tag resources it creates
   statement {
@@ -159,7 +159,7 @@ data "aws_iam_policy_document" "glue_service_permission" {
 
 # glue policy attachment to role
 resource "aws_iam_role_policy" "glue_policy" {
-  name = "${var.cob_glue_name}-policy"
-  role = aws_iam_role.glue_role.id
+  name   = "${var.cob_glue_name}-policy"
+  role   = aws_iam_role.glue_role.id
   policy = data.aws_iam_policy_document.glue_service_permission.json
 }

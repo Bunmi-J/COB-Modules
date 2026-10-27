@@ -1,17 +1,17 @@
 variable "bucket_name" {
-    description = "This describe the specific bucket title "
-    type = string
+  description = "This describe the specific bucket title "
+  type        = string
 }
 
 variable "project_name" {
-    type = string
-    description = "This is the project title"
-    #default = "cob-project"
+  type        = string
+  description = "This is the project title"
+  #default = "cob-project"
 }
 
 variable "environment" {
-    description = "Environment name can be dev, staging or prod"
-    default = "dev"
+  description = "Environment name can be dev, staging or prod"
+  default     = "dev"
 }
 
 variable "versioning_enabled" {
@@ -27,9 +27,9 @@ variable "enable_lifecycle" {
 }
 
 variable "lifecycle_prefix" {
-    description = "enable consumer to specify the object prefix the lifecycle applies to. Empty string means lc is applied to all objects"
-    type = string
-    default = ""
+  description = "enable consumer to specify the object prefix the lifecycle applies to. Empty string means lc is applied to all objects"
+  type        = string
+  default     = ""
 }
 variable "consumer_name" {
   description = "Name of the consumer/service using this bucket. Used to namespace object keys (e.g. consumers/<consumer_name>/...) and to scope lifecycle rules so multiple consumers can safely share one bucket."

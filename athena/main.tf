@@ -3,7 +3,7 @@ data "aws_caller_identity" "current" {}
 
 
 resource "aws_athena_data_catalog" "cob_athena" {
-  name        = var.athena_data_catalog 
+  name        = var.athena_data_catalog
   description = "Glue based Data Catalog"
   type        = "GLUE"
 
@@ -82,7 +82,7 @@ resource "aws_athena_workgroup" "cob_workgroup" {
   tags = {
     Name        = "${var.project_name}-${var.environment}-athena"
     Environment = var.environment
-    consumer = var.consumer_name
+    consumer    = var.consumer_name
   }
 }
 

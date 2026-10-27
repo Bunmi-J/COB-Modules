@@ -1,18 +1,18 @@
 variable "project_name" {
-    type = string
-    description = "This is the project title"
-    #default = "cob-project"
+  type        = string
+  description = "This is the project title"
+  #default = "cob-project"
 }
 
 variable "environment" {
-    description = "Environment name can be dev, staging or prod"
-    default = "dev"
+  description = "Environment name can be dev, staging or prod"
+  default     = "dev"
 }
 
 
 variable "athena_data_catalog" {
-    description = "Athena use the data catalog to store and retrieve tables metadata"
-    type = string
+  description = "Athena use the data catalog to store and retrieve tables metadata"
+  type        = string
 }
 
 #variable "query_result_bucket" {

@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "data_engineer_assume" {
     principals {
       type = "AWS"
 
-      identifiers = "arn:aws:iam::469935552963:user/Admin" #aws_iam_role.data_engineer.arn        #var.allowed_principal_arns 
+      identifiers = ["arn:aws:iam::469935552963:user/Admin"] #aws_iam_role.data_engineer.arn        #var.allowed_principal_arns 
 
       #"arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/cob-data-engineer" 
 

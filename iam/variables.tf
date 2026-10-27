@@ -6,12 +6,12 @@ variable "allowed_s3_prefixes" {
 
 variable "resource_name" {
   description = "project title and project environment"
-  type = string
+  type        = string
 }
 
 variable "cob_glue_name" {
-    description = "iam role name"
-    type = string
+  description = "iam role name"
+  type        = string
 }
 
 variable "source_bucket_name" {
@@ -25,14 +25,14 @@ variable "query_results_bucket_name" {
 }
 
 variable "project_name" {
-    type = string
-    description = "This is the project title"
-    #default = "cob-root-project"
+  type        = string
+  description = "This is the project title"
+  #default = "cob-root-project"
 }
 
 variable "environment" {
-    description = "Environment name can be dev, staging or prod"
-    default = "dev"
+  description = "Environment name can be dev, staging or prod"
+  default     = "dev"
 }
 
 variable "glue_role_arn" {
@@ -42,7 +42,7 @@ variable "glue_role_arn" {
 
 variable "username" {
   description = "username for the athena"
-  type = string
+  type        = string
 }
 
 variable "allowed_principal_arns" {
@@ -52,6 +52,6 @@ variable "allowed_principal_arns" {
 
 variable "athena_user" {
   description = "List of IAM users that can access the Athena"
-  type = list(string)
+  type        = list(string)
 }
 

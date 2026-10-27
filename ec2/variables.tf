@@ -1,11 +1,11 @@
 variable "vpc_id" {
-    description = "This vpc id for cob_vpc "
-    type = string
+  description = "This vpc id for cob_vpc "
+  type        = string
 }
 
 variable "security_groupname" {
-    description = "This describe the specific security group name "
-    type = string
+  description = "This describe the specific security group name "
+  type        = string
 }
 
 variable "cidr_block" {
@@ -14,19 +14,19 @@ variable "cidr_block" {
 }
 
 variable "subnet_ids" {
-    description = "This subnet ids for private subnet "
-    type = list(string)
+  description = "This subnet ids for private subnet "
+  type        = list(string)
 }
 
 variable "project_name" {
-    type = string
-    description = "This is the project title"
-    #default = "cob-project"
+  type        = string
+  description = "This is the project title"
+  #default = "cob-project"
 }
 
 variable "environment" {
-    description = "Environment name can be dev, staging or prod"
-    default = "dev"
+  description = "Environment name can be dev, staging or prod"
+  default     = "dev"
 }
 
 variable "consumer_name" {

@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "cob-s3" {
   tags = {
     Name        = "${var.project_name}-s3-bucket"
     Environment = "${var.environment}"
-    consumer = "${var.consumer_name}"
+    consumer    = "${var.consumer_name}"
   }
 }
 
@@ -19,10 +19,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "cob-s3-lc" {
       prefix = var.lifecycle_prefix
     }
 
-   # transition {
-   #   days          = 30
-   #   storage_class = "STANDARD_IA"
-   # }
+    # transition {
+    #   days          = 30
+    #   storage_class = "STANDARD_IA"
+    # }
 
     expiration {
       days = 365
@@ -65,7 +65,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt_config_s3
 # s3 object for cob
 resource "aws_s3_object" "cob-object" {
   bucket = aws_s3_bucket.cob-s3.bucket
-  count = var.enable_object_upload ? 1 : 0
+  count  = var.enable_object_upload ? 1 : 0
   key    = var.object_key
   source = var.object_source
 }

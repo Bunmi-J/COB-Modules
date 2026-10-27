@@ -19,8 +19,8 @@ output "ecs_execution_role_arn" {
 }
 
 output "glue_role_arn" {
-    description = "Amazon resource name for the glue role"
-    value = aws_iam_role.glue_role.arn
+  description = "Amazon resource name for the glue role"
+  value       = aws_iam_role.glue_role.arn
 }
 
 

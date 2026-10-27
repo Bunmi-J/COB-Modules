@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "ecs_assume_role" {
 
     principals {
       type        = "Service"
-      identifiers = ["ecs-tasks.amazonaws.com"] 
+      identifiers = ["ecs-tasks.amazonaws.com"]
     }
   }
 }
@@ -32,47 +32,47 @@ data "aws_iam_policy_document" "ecs_perm" {
     resources = ["*"]
   }
 
- dynamic "statement" {
-   for_each = length(var.allowed_s3_prefixes) > 0 ? [1] : []
-   content {
+  dynamic "statement" {
+    for_each = length(var.allowed_s3_prefixes) > 0 ? [1] : []
+    content {
       sid    = "S3ListBucket"
       effect = "Allow"
 
       actions = [
-      "s3:ListBucket"
-  ]
-
-  resources = [
-    for bucket in var.allowed_s3_prefixes :
-    "arn:aws:s3:::${bucket}"
-  ]
-  }
-}
-
-  dynamic "statement" {
-     for_each = length(var.allowed_s3_prefixes) > 0 ? [1] : []
-     content {
-            sid    = "S3ObjectAccess"
-            effect = "Allow"
-
-            actions = [
-            "s3:GetObject"
-              
+        "s3:ListBucket"
       ]
 
-  resources = [
-    for bucket in var.allowed_s3_prefixes :
-    "arn:aws:s3:::${bucket}/*"
-  ]
-     }
-}
-  
+      resources = [
+        for bucket in var.allowed_s3_prefixes :
+        "arn:aws:s3:::${bucket}"
+      ]
+    }
   }
-  
+
+  dynamic "statement" {
+    for_each = length(var.allowed_s3_prefixes) > 0 ? [1] : []
+    content {
+      sid    = "S3ObjectAccess"
+      effect = "Allow"
+
+      actions = [
+        "s3:GetObject"
+
+      ]
+
+      resources = [
+        for bucket in var.allowed_s3_prefixes :
+        "arn:aws:s3:::${bucket}/*"
+      ]
+    }
+  }
+
+}
+
 resource "aws_iam_role_policy" "ecs_policy" {
-      name   = "${var.resource_name}-ecs_main_policy"
-      role   = aws_iam_role.ecs_container.id
-      policy = data.aws_iam_policy_document.ecs_perm.json
+  name   = "${var.resource_name}-ecs_main_policy"
+  role   = aws_iam_role.ecs_container.id
+  policy = data.aws_iam_policy_document.ecs_perm.json
 }
 
 # ECS trust policy document for container to assume Execution Role

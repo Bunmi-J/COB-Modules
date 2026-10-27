@@ -19,8 +19,8 @@ resource "aws_glue_catalog_database" "cob_catalog_db" {
 
 # glue catalog database table
 resource "aws_glue_catalog_table" "cob_table" {
-  name          = var.catalog_table_name  
-  database_name = var.catalog_database_name  
+  name          = var.catalog_table_name
+  database_name = var.catalog_database_name
 }
 
 
@@ -33,7 +33,7 @@ resource "aws_glue_crawler" "cob_crawler" {
 
   s3_target {
     path = "s3://${var.s3_bucket_name}"
-    
+
   }
 }
 

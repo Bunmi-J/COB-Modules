@@ -35,39 +35,39 @@ data "aws_iam_policy_document" "ec2_perm" {
 
 
   dynamic "statement" {
-     for_each = length(var.allowed_s3_prefixes) > 0 ? [1] : []
-     content {
-     sid    = "S3ListBucket"
-     effect = "Allow"
+    for_each = length(var.allowed_s3_prefixes) > 0 ? [1] : []
+    content {
+      sid    = "S3ListBucket"
+      effect = "Allow"
 
-     actions = [
-     "s3:ListBucket"
-  ]
-
-  resources = [
-    for bucket in var.allowed_s3_prefixes :
-    "arn:aws:s3:::${bucket}"
-  ]
-  }
-}
-
-  dynamic "statement" {
-     for_each = length(var.allowed_s3_prefixes) > 0 ? [1] : []
-     content {
-     sid    = "S3ObjectAccess"
-     effect = "Allow"
-
-     actions = [
-              "s3:GetObject",
-              "s3:PutObject"
+      actions = [
+        "s3:ListBucket"
       ]
 
-  resources = [
-    for bucket in var.allowed_s3_prefixes :
-    "arn:aws:s3:::${bucket}/*"
-  ]
+      resources = [
+        for bucket in var.allowed_s3_prefixes :
+        "arn:aws:s3:::${bucket}"
+      ]
+    }
   }
-}
+
+  dynamic "statement" {
+    for_each = length(var.allowed_s3_prefixes) > 0 ? [1] : []
+    content {
+      sid    = "S3ObjectAccess"
+      effect = "Allow"
+
+      actions = [
+        "s3:GetObject",
+        "s3:PutObject"
+      ]
+
+      resources = [
+        for bucket in var.allowed_s3_prefixes :
+        "arn:aws:s3:::${bucket}/*"
+      ]
+    }
+  }
 
 }
 
@@ -79,9 +79,9 @@ resource "aws_iam_instance_profile" "cob_ec2_instance_profile" {
 
 # ec2 permission policy
 resource "aws_iam_role_policy" "ec2_policy" {
-  name = "${var.resource_name}-ec2_policy"
-  role = aws_iam_role.instance.id
+  name   = "${var.resource_name}-ec2_policy"
+  role   = aws_iam_role.instance.id
   policy = data.aws_iam_policy_document.ec2_perm.json
 }
-  
+
 

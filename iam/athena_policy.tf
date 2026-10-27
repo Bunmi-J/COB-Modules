@@ -13,13 +13,13 @@ data "aws_iam_policy_document" "data_engineer_assume" {
     principals {
       type = "AWS"
 
-      identifiers =   "arn:aws:iam::469935552963:user/Admin"  #aws_iam_role.data_engineer.arn        #var.allowed_principal_arns 
+      identifiers = "arn:aws:iam::469935552963:user/Admin" #aws_iam_role.data_engineer.arn        #var.allowed_principal_arns 
 
-       #"arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/cob-data-engineer" 
+      #"arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/cob-data-engineer" 
 
-        
 
-      
+
+
     }
   }
 }
@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "query_access" {
     resources = ["*"]
   }
 
-  
+
   statement {
     sid    = "AthenaDataCatalogManagement"
     effect = "Allow"
@@ -136,9 +136,9 @@ resource "aws_iam_policy" "athena_access_policy" {
 
 #
 resource "aws_iam_role" "data_engineer" {
- name               = "${var.project_name}-${var.environment}-data-engineer" #var.username
- path               = "/system/"
- assume_role_policy = data.aws_iam_policy_document.data_engineer_assume.json
+  name               = "${var.project_name}-${var.environment}-data-engineer" #var.username
+  path               = "/system/"
+  assume_role_policy = data.aws_iam_policy_document.data_engineer_assume.json
 }
 
 
@@ -158,9 +158,11 @@ data "aws_iam_policy_document" "admin_assume_data_engineer" {
       "sts:AssumeRole"
     ]
 
-    resources = "arn:aws:iam::469935552963:role/system/cob-project-dev-data-engineer"
-    #  [aws_iam_role.data_engineer.arn
-  # ]
+    resources = ["arn:aws:iam::469935552963:role/system/cob-project-dev-data-engineer"]
+    #[aws_iam_role.data_engineer.arn] 
+
+
+
   }
 }
 
